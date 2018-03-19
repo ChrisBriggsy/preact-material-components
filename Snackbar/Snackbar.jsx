@@ -1,6 +1,6 @@
-import { h } from "preact";
-import MaterialComponent from "../MaterialComponent";
-import { MDCSnackbar } from "@material/snackbar/";
+import {h} from 'preact';
+import MaterialComponent from '../MaterialComponent';
+import {MDCSnackbar} from '@material/snackbar/';
 
 function shallowDiffers(a, b) {
   for (let i in a) if (!(i in b)) return true;
@@ -14,7 +14,7 @@ function shallowDiffers(a, b) {
 export default class Snackbar extends MaterialComponent {
   constructor() {
     super();
-    this.componentName = "snackbar";
+    this.componentName = 'snackbar';
     this.isPureReactComponent = true;
   }
   componentDidMount() {
@@ -42,9 +42,8 @@ export default class Snackbar extends MaterialComponent {
         aria-live="assertive"
         aria-atomic="true"
         aria-hidden="true"
-        ref={control => (this.control = control)}
-        {...props}
-      >
+        ref={this.setControlRef}
+        {...props}>
         <div className="mdc-snackbar__text" />
         <div className="mdc-snackbar__action-wrapper">
           <button type="button" className="mdc-snackbar__action-button" />

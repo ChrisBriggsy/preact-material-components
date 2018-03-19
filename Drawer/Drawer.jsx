@@ -1,8 +1,8 @@
-import { h } from "preact";
-import MaterialComponent from "../MaterialComponent";
-import { MDCTemporaryDrawer } from "@material/drawer/temporary";
-import { MDCPersistentDrawer } from "@material/drawer/persistent";
-import List from "../List";
+import {h} from 'preact';
+import MaterialComponent from '../MaterialComponent';
+import {MDCTemporaryDrawer} from '@material/drawer/temporary';
+import {MDCPersistentDrawer} from '@material/drawer/persistent';
+import List from '../List';
 
 /**
  * Default props for drawers
@@ -14,7 +14,7 @@ const defaultProps = {
 class TemporaryDrawer extends MaterialComponent {
   constructor() {
     super();
-    this.componentName = "drawer--temporary";
+    this.componentName = 'drawer--temporary';
     this._open = this._open.bind(this);
     this._close = this._close.bind(this);
   }
@@ -30,13 +30,13 @@ class TemporaryDrawer extends MaterialComponent {
   }
   componentDidMount() {
     this.MDComponent = MDCTemporaryDrawer.attachTo(this.control);
-    this.MDComponent.listen("MDCTemporaryDrawer:open", this._open);
-    this.MDComponent.listen("MDCTemporaryDrawer:close", this._close);
+    this.MDComponent.listen('MDCTemporaryDrawer:open', this._open);
+    this.MDComponent.listen('MDCTemporaryDrawer:close', this._close);
     toggleDrawer(defaultProps, this.props, this.MDComponent);
   }
   componentWillUnmount() {
-    this.MDComponent.unlisten("MDCTemporaryDrawer:close", this._close);
-    this.MDComponent.unlisten("MDCTemporaryDrawer:open", this._open);
+    this.MDComponent.unlisten('MDCTemporaryDrawer:close', this._close);
+    this.MDComponent.unlisten('MDCTemporaryDrawer:open', this._open);
     this.MDComponent.destroy && this.MDComponent.destroy();
   }
   componentWillUpdate(nextProps) {
@@ -46,11 +46,8 @@ class TemporaryDrawer extends MaterialComponent {
     return (
       <aside
         className="mdc-typography mdc-drawer"
-        ref={control => {
-          this.control = control;
-        }}
-        {...props}
-      >
+        ref={this.setControlRef}
+        {...props}>
         <nav className="mdc-drawer__drawer">{props.children}</nav>
       </aside>
     );
@@ -63,7 +60,7 @@ class TemporaryDrawer extends MaterialComponent {
 class PermanentDrawer extends MaterialComponent {
   constructor() {
     super();
-    this.componentName = "drawer--permanent";
+    this.componentName = 'drawer--permanent';
   }
   materialDom(props) {
     return (
@@ -80,7 +77,7 @@ class PermanentDrawer extends MaterialComponent {
 class PersistentDrawer extends MaterialComponent {
   constructor() {
     super();
-    this.componentName = "drawer--persistent";
+    this.componentName = 'drawer--persistent';
     this._open = this._open.bind(this);
     this._close = this._close.bind(this);
   }
@@ -96,13 +93,13 @@ class PersistentDrawer extends MaterialComponent {
   }
   componentDidMount() {
     this.MDComponent = MDCPersistentDrawer.attachTo(this.control);
-    this.MDComponent.listen("MDCPersistentDrawer:open", this._open);
-    this.MDComponent.listen("MDCPersistentDrawer:close", this._close);
+    this.MDComponent.listen('MDCPersistentDrawer:open', this._open);
+    this.MDComponent.listen('MDCPersistentDrawer:close', this._close);
     toggleDrawer(defaultProps, this.props, this.MDComponent);
   }
   componentWillUnmount() {
-    this.MDComponent.unlisten("MDCPersistentDrawer:close", this._close);
-    this.MDComponent.unlisten("MDCPersistentDrawer:open", this._open);
+    this.MDComponent.unlisten('MDCPersistentDrawer:close', this._close);
+    this.MDComponent.unlisten('MDCPersistentDrawer:open', this._open);
     this.MDComponent.destroy && this.MDComponent.destroy();
   }
   componentWillUpdate(nextProps) {
@@ -112,11 +109,8 @@ class PersistentDrawer extends MaterialComponent {
     return (
       <aside
         className="mdc-typography mdc-drawer"
-        ref={control => {
-          this.control = control;
-        }}
-        {...props}
-      >
+        ref={this.setControlRef}
+        {...props}>
         <nav className="mdc-drawer__drawer">{props.children}</nav>
       </aside>
     );
@@ -126,16 +120,11 @@ class PersistentDrawer extends MaterialComponent {
 class DrawerHeader extends MaterialComponent {
   constructor() {
     super();
-    this.componentName = "drawer__header";
+    this.componentName = 'drawer__header';
   }
   materialDom(props) {
     return (
-      <header
-        ref={control => {
-          this.control = control;
-        }}
-        {...props}
-      >
+      <header ref={this.setControlRef} {...props}>
         <div className="mdc-drawer__header-content">{props.children}</div>
       </header>
     );
@@ -145,17 +134,11 @@ class DrawerHeader extends MaterialComponent {
 class DrawerContent extends MaterialComponent {
   constructor() {
     super();
-    this.componentName = "drawer__content";
+    this.componentName = 'drawer__content';
   }
   materialDom(props) {
     return (
-      <nav
-        className="mdc-list"
-        ref={control => {
-          this.control = control;
-        }}
-        {...props}
-      >
+      <nav className="mdc-list" ref={this.setControlRef} {...props}>
         {props.children}
       </nav>
     );
@@ -173,7 +156,7 @@ class DrawerItem extends List.LinkItem {
     const returnedNode = super.materialDom(props);
     /* Logic to add selected class */
     if (props.selected) {
-      returnedNode.attributes["className"] = "mdc-list-item--activated";
+      returnedNode.attributes['className'] = 'mdc-list-item--activated';
     }
     return returnedNode;
   }
@@ -184,8 +167,8 @@ class DrawerItem extends List.LinkItem {
  */
 function toggleDrawer(oldprops, newprops, drawer) {
   if (
-    "open" in oldprops &&
-    "open" in newprops &&
+    'open' in oldprops &&
+    'open' in newprops &&
     oldprops.open !== newprops.open
   ) {
     drawer.open = newprops.open;

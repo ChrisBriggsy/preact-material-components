@@ -1,6 +1,6 @@
-import { h } from "preact";
-import MaterialComponent from "../MaterialComponent";
-import { MDCLinearProgress } from "@material/linear-progress";
+import {h} from 'preact';
+import MaterialComponent from '../MaterialComponent';
+import {MDCLinearProgress} from '@material/linear-progress';
 
 /**
  * @prop indeterminate = false
@@ -9,8 +9,8 @@ import { MDCLinearProgress } from "@material/linear-progress";
 export default class LinearProgress extends MaterialComponent {
   constructor() {
     super();
-    this.componentName = "linear-progress";
-    this._mdcProps = ["indeterminate", "reversed"];
+    this.componentName = 'linear-progress';
+    this._mdcProps = ['indeterminate', 'reversed'];
   }
   componentDidMount() {
     this.MDComponent = new MDCLinearProgress(this.control);
@@ -24,11 +24,7 @@ export default class LinearProgress extends MaterialComponent {
   }
   materialDom(props) {
     return (
-      <div
-        role="progressbar"
-        {...props}
-        ref={control => (this.control = control)}
-      >
+      <div role="progressbar" {...props} ref={this.setControlRef}>
         <div className="mdc-linear-progress__buffering-dots" />
         <div className="mdc-linear-progress__buffer" />
         <div className="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
